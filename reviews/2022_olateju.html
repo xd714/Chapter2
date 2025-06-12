@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabbit Crossbreeding Research Flow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f39c12;
+            padding-bottom: 5px;
+        }
+        
+        /* Flow Diagram Styles */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .step-number {
+            background: #f39c12;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .step-details {
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .step-specs {
+            background: #fef9e7;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .crossbreeding-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .cross-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            text-align: center;
+        }
+        
+        .cross-1 { border-color: #e74c3c; }
+        .cross-2 { border-color: #3498db; }
+        .cross-3 { border-color: #27ae60; }
+        .cross-4 { border-color: #9b59b6; }
+        .cross-5 { border-color: #f39c12; }
+        
+        .cross-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.0em;
+        }
+        
+        .cross-1 .cross-title { color: #e74c3c; }
+        .cross-2 .cross-title { color: #3498db; }
+        .cross-3 .cross-title { color: #27ae60; }
+        .cross-4 .cross-title { color: #9b59b6; }
+        .cross-5 .cross-title { color: #f39c12; }
+        
+        /* Analysis Sections */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .analysis-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid #f39c12;
+        }
+        
+        .analysis-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .why-card { border-top-color: #e74c3c; }
+        .how-card { border-top-color: #f39c12; }
+        .what-card { border-top-color: #27ae60; }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        .results-table th,
+        .results-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .results-table th {
+            background: #f39c12;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .results-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .best-performance {
+            background: #d5f4e6 !important;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Effects of genotype, gestation length and litter size on the birth weight, litter weight, pre- and post-weaning weight of crossbred kits</h1>
+            <p>Rabbit Crossbreeding Performance Analysis</p>
+            
+            <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
+                <p style="margin: 0; font-size: 0.9em;"><strong>Authors:</strong> Imoleayo Sarah Olateju, Clifford Adinma Chineke</p>
+                <p style="margin: 5px 0 0 0; font-size: 0.9em;"><strong>Institution:</strong> Federal University of Technology, Akure, Nigeria</p>
+                <p style="margin: 10px 0 0 0;">
+                    <a href="https://doi.org/10.1186/s42269-022-00843-8" 
+                       target="_blank" 
+                       style="color: #74b9ff; text-decoration: none; font-weight: bold; border: 1px solid #74b9ff; padding: 5px 10px; border-radius: 3px; display: inline-block;">
+                        🔗 View Original Paper
+                    </a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Paper Information & References</div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #f39c12; margin-bottom: 30px;">
+                    <p><strong>Citation:</strong> Olateju, I. S., & Chineke, C. A. (2022). Effects of genotype, gestation length and litter size on the birth weight, litter weight, pre- and post-weaning weight of crossbred kits. Bulletin of the National Research Centre, 46(1), 166.</p>
+                    
+                    <p><strong>Key References from the Paper:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Chineke, C.A. (2005). Relationship between body weight and linear dimensions</li>
+                        <li>Nofal, R., et al. (2005). Spanish synthetic line evaluation</li>
+                        <li>Rashwan, A.A. & Marai, I.F.M. (2000). Mortality in young rabbits review</li>
+                        <li>Samkol, P. & Lukefahr, S.D. (2008). Organic rabbit production role</li>
+                    </ul>
+                </div>
+                
+                <div class="section-title">Crossbreeding Design Overview</div>
+                
+                <div class="crossbreeding-grid">
+                    <div class="cross-box cross-1">
+                        <div class="cross-title">NZW × REX</div>
+                        <div class="step-details">
+                            <strong>Sire:</strong> New Zealand White<br>
+                            <strong>Dam:</strong> Rex<br>
+                            <strong>Kits:</strong> 18 total<br>
+                            <strong>Performance:</strong> Moderate
+                        </div>
+                    </div>
+                    
+                    <div class="cross-box cross-2">
+                        <div class="cross-title">DBT × CFW</div>
+                        <div class="step-details">
+                            <strong>Sire:</strong> Dutch-belted<br>
+                            <strong>Dam:</strong> Californian White<br>
+                            <strong>Kits:</strong> 23 total<br>
+                            <strong>Performance:</strong> Lowest
+                        </div>
+                    </div>
+                    
+                    <div class="cross-box cross-3">
+                        <div class="cross-title">LAB × NZW</div>
+                        <div class="step-details">
+                            <strong>Sire:</strong> Local Breed<br>
+                            <strong>Dam:</strong> New Zealand White<br>
+                            <strong>Kits:</strong> 18 total<br>
+                            <strong>Performance:</strong> Moderate
+                        </div>
+                    </div>
+                    
+                    <div class="cross-box cross-4">
+                        <div class="cross-title">REX × LAB</div>
+                        <div class="step-details">
+                            <strong>Sire:</strong> Rex<br>
+                            <strong>Dam:</strong> Local Breed<br>
+                            <strong>Kits:</strong> 20 total<br>
+                            <strong>Performance:</strong> Moderate
+                        </div>
+                    </div>
+                    
+                    <div class="cross-box cross-5">
+                        <div class="cross-title">CFW × DBT</div>
+                        <div class="step-details">
+                            <strong>Sire:</strong> Californian White<br>
+                            <strong>Dam:</strong> Dutch-belted<br>
+                            <strong>Kits:</strong> 19 total<br>
+                            <strong>Performance:</strong> <strong>BEST</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-title">Detailed Experimental Design Flow</div>
+                
+                <div class="flow-container">
+                    
+                    <div class="flow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Foundation Stock Establishment</div>
+                            <div class="step-details">
+                                Strategic acquisition of breeding stock from multiple breeds
+                                <div class="step-specs">
+                                    <strong>Total population:</strong> 40 growing rabbits<br>
+                                    <strong>Composition:</strong> 6 does + 2 bucks per breed<br>
+                                    <strong>Breeds:</strong> NZW, DBT, CFW, Rex, Local breed<br>
+                                    <strong>Source:</strong> Reputable suppliers for genetic quality
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Housing and Management System</div>
+                            <div class="step-details">
+                                Standardized environment for all genetic groups
+                                <div class="step-specs">
+                                    <strong>Housing:</strong> Individual hutches with stainless steel equipment<br>
+                                    <strong>Feeding:</strong> Commercial pellets (16.23% CP, 2280 Kcal/kg) morning<br>
+                                    <strong>Forage:</strong> Tridax procumbens and Talinum triangulare evening<br>
+                                    <strong>Water:</strong> Fresh clean water available ad libitum
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Mating Protocol and Pregnancy Management</div>
+                            <div class="step-details">
+                                Systematic breeding approach for crossbred kit production
+                                <div class="step-specs">
+                                    <strong>Mating method:</strong> Does moved to buck's cage<br>
+                                    <strong>Pregnancy detection:</strong> Palpation 10 days post-mating<br>
+                                    <strong>Re-breeding:</strong> Failed conception returned to same buck<br>
+                                    <strong>Nest boxes:</strong> Placed day 25 of gestation
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Data Collection Protocol</div>
+                            <div class="step-details">
+                                Comprehensive measurement system from birth to post-weaning
+                                <div class="step-specs">
+                                    <strong>Birth measurements:</strong> Individual and litter weights immediately post-birth<br>
+                                    <strong>Pre-weaning:</strong> Day 21 body weights recorded<br>
+                                    <strong>Post-weaning:</strong> Day 35 body weights (weaning at day 28)<br>
+                                    <strong>Equipment:</strong> Sensitive scale (10kg capacity, 0.01kg accuracy)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Statistical Analysis Design</div>
+                            <div class="step-details">
+                                Advanced mixed model analysis with correlation estimation
+                                <div class="step-specs">
+                                    <strong>Software:</strong> SAS 2008 mixed model least-squares procedure<br>
+                                    <strong>Variance components:</strong> Henderson's Method 3<br>
+                                    <strong>Effects estimated:</strong> Genotype, gestation length, litter size<br>
+                                    <strong>Correlations:</strong> Phenotypic and genetic correlation coefficients
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="section-title">Performance Results by Cross</div>
+                
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Genotype</th>
+                            <th>Birth Weight (g)</th>
+                            <th>Litter Weight (g)</th>
+                            <th>Day 21 Weight (g)</th>
+                            <th>Day 35 Weight (g)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>NZW × REX</strong></td>
+                            <td>84.75 ± 2.09</td>
+                            <td>375.95 ± 22.13</td>
+                            <td>233.25 ± 4.81</td>
+                            <td>357.80 ± 10.07</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DBT × CFW</strong></td>
+                            <td>74.25 ± 1.78</td>
+                            <td>391.70 ± 26.29</td>
+                            <td>218.10 ± 5.14</td>
+                            <td>332.60 ± 12.54</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LAB × NZW</strong></td>
+                            <td>84.60 ± 4.24</td>
+                            <td>357.15 ± 26.20</td>
+                            <td>232.05 ± 8.16</td>
+                            <td>349.50 ± 13.90</td>
+                        </tr>
+                        <tr class="best-performance">
+                            <td><strong>CFW × DBT</strong></td>
+                            <td>91.90 ± 9.84</td>
+                            <td>420.10 ± 28.93</td>
+                            <td>246.35 ± 12.53</td>
+                            <td>368.25 ± 17.36</td>
+                        </tr>
+                        <tr>
+                            <td><strong>REX × LAB</strong></td>
+                            <td>78.95 ± 3.34</td>
+                            <td>396.45 ± 13.07</td>
+                            <td>225.80 ± 6.56</td>
+                            <td>345.75 ± 11.33</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">Why, How, What Analysis</div>
+                
+                <div class="analysis-grid">
+                    <div class="analysis-card why-card">
+                        <div class="analysis-title">WHY - Research Motivation</div>
+                        <div class="step-details">
+                            <strong>Economic Imperative:</strong> Increasing demand for animal protein requires efficient meat production systems.
+                            
+                            <ul>
+                                <li><strong>Protein demand:</strong> FAO predictions show <span class="highlight">rising global population</span> needs</li>
+                                <li><strong>Rabbit advantages:</strong> Low cholesterol, high protein, no religious taboos</li>
+                                <li><strong>Production efficiency:</strong> Birth weight crucial for <span class="highlight">survival and growth</span></li>
+                                <li><strong>Genetic optimization:</strong> Need to identify best crossbreeding combinations</li>
+                            </ul>
+                            
+                            <strong>Knowledge Gap:</strong> Limited information on crossbreeding effects in tropical rabbit production systems.
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-card how-card">
+                        <div class="analysis-title">HOW - Methodology</div>
+                        <div class="step-details">
+                            <strong>Comprehensive Factorial Design:</strong> Systematic evaluation of multiple factors affecting kit performance.
+                            
+                            <ul>
+                                <li><strong>Genetic factors:</strong> 5 breeds in systematic crossing design</li>
+                                <li><strong>Environmental factors:</strong> Gestation length (29-34 days) and litter size (2-7)</li>
+                                <li><strong>Performance tracking:</strong> Birth through post-weaning (35 days)</li>
+                                <li><strong>Statistical rigor:</strong> Mixed models with variance component analysis</li>
+                            </ul>
+                            
+                            <strong>Validation:</strong> Henderson's Method 3 for unbiased genetic parameter estimation.
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-card what-card">
+                        <div class="analysis-title">WHAT - Key Discoveries</div>
+                        <div class="step-details">
+                            <strong>Superior Cross Identified:</strong> CFW × DBT combination shows best overall performance.
+                            
+                            <ul>
+                                <li><span class="highlight">Best genotype:</span> CFW × DBT highest weights across all stages</li>
+                                <li><span class="highlight">Gestation effect:</span> 34-day gestation produces 217g vs 66.75g at 29 days</li>
+                                <li><span class="highlight">Litter size trade-off:</span> Large litters (7) reduce individual kit weights</li>
+                                <li><span class="highlight">Predictive value:</span> Birth weight strongly correlates with later performance (r=0.78-0.92)</li>
+                            </ul>
+                            
+                            <strong>Practical Application:</strong> Clear breeding recommendations for tropical rabbit production systems.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Findings Section -->
+            <div class="section">
+                <div class="section-title">Key Factor Effects Analysis</div>
+                
+                <div class="flow-step">
+                    <div class="step-number">G</div>
+                    <div class="step-content">
+                        <div class="step-title">Gestation Length Impact</div>
+                        <div class="step-details">
+                            Critical factor showing linear relationship with kit performance
+                            <div class="step-specs">
+                                <strong>29 days:</strong> 66.75±0.51g birth weight, poor subsequent growth<br>
+                                <strong>30-32 days:</strong> Intermediate performance (72-89g birth weight)<br>
+                                <strong>34 days:</strong> 217.00±3.00g birth weight, superior growth trajectory<br>
+                                <strong>Implication:</strong> Fetal development time crucial for viable offspring
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">L</div>
+                    <div class="step-content">
+                        <div class="step-title">Litter Size Trade-offs</div>
+                        <div class="step-details">
+                            Clear inverse relationship between litter size and individual kit quality
+                            <div class="step-specs">
+                                <strong>Small litters (2):</strong> 148.75±39.42g individual birth weight<br>
+                                <strong>Medium litters (4-5):</strong> 90-92g individual birth weight<br>
+                                <strong>Large litters (7):</strong> 69.93±0.93g individual birth weight<br>
+                                <strong>Management:</strong> Standardization strategies needed for large litters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">C</div>
+                    <div class="step-content">
+                        <div class="step-title">Correlation Patterns</div>
+                        <div class="step-details">
+                            Strong predictive relationships between life stages
+                            <div class="step-specs">
+                                <strong>Birth-21 days:</strong> r=0.78 (phenotypic), genetic correlation high<br>
+                                <strong>21-35 days:</strong> r=0.92 (strongest correlation observed)<br>
+                                <strong>Birth-35 days:</strong> r=0.69 (good long-term predictive value)<br>
+                                <strong>Negative correlation:</strong> Individual vs litter birth weight (r=-0.19)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Practical Implications -->
+            <div class="section">
+                <div class="section-title">Breeding Recommendations</div>
+                
+                <div style="background: #fff3cd; padding: 20px; border-radius: 8px; border: 1px solid #ffeaa7; margin: 20px 0;">
+                    <div style="font-weight: bold; color: #856404; margin-bottom: 15px; font-size: 1.1em;">Management Guidelines</div>
+                    
+                    <p><strong>Optimal Crossbreeding Strategy:</strong></p>
+                    <ul>
+                        <li><strong>Primary recommendation:</strong> Use Californian White sires with Dutch-belted dams</li>
+                        <li><strong>Alternative crosses:</strong> NZW × REX and LAB × NZW show moderate performance</li>
+                        <li><strong>Avoid:</strong> DBT × CFW combination due to poor performance</li>
+                    </ul>
+                    
+                    <p><strong>Environmental Management:</strong></p>
+                    <ul>
+                        <li><strong>Gestation monitoring:</strong> Ensure adequate gestation length (avoid premature kindling)</li>
+                        <li><strong>Litter management:</strong> Consider cross-fostering for very large litters</li>
+                        <li><strong>Early selection:</strong> Use birth weight as predictor for future performance</li>
+                        <li><strong>Nutrition:</strong> Maintain consistent feeding for optimal fetal development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Back Navigation -->
+        <div style="margin-top: 60px; text-align: right; padding-right: 30px;">
+            <a href="../index.html" style="color: #64748b; text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 0; display: inline-block; position: relative; transition: color 0.3s ease;">
+                ← Back to Index
+            </a>
+        </div>
+    </div>
+</body>
+</html>

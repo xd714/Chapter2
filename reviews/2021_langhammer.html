@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifetime Fecundity Research Flow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        /* Flow Diagram Styles */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .step-number {
+            background: #27ae60;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .step-details {
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .step-specs {
+            background: #e8f6f3;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .line-comparison {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .line-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            text-align: center;
+        }
+        
+        .fl1-box { border-color: #e74c3c; }
+        .fl2-box { border-color: #f39c12; }
+        .ctrl-box { border-color: #3498db; }
+        .du6-box { border-color: #9b59b6; }
+        .du6p-box { border-color: #1abc9c; }
+        
+        .line-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.0em;
+        }
+        
+        .fl1-box .line-title { color: #e74c3c; }
+        .fl2-box .line-title { color: #f39c12; }
+        .ctrl-box .line-title { color: #3498db; }
+        .du6-box .line-title { color: #9b59b6; }
+        .du6p-box .line-title { color: #1abc9c; }
+        
+        /* Analysis Sections */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .analysis-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid #27ae60;
+        }
+        
+        .analysis-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .why-card { border-top-color: #e74c3c; }
+        .how-card { border-top-color: #27ae60; }
+        .what-card { border-top-color: #3498db; }
+        
+        .highlight {
+            background: #d5f4e6;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .fecundity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        .fecundity-table th,
+        .fecundity-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .fecundity-table th {
+            background: #27ae60;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .fecundity-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Two mouse lines selected for large litter size display different lifetime fecundities</h1>
+            <p>Long-term Selection Experiment Analysis</p>
+            
+            <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
+                <p style="margin: 0; font-size: 0.9em;"><strong>Authors:</strong> Martina Langhammer, Erika Wytrwat, Marten Michaelis, Jennifer Schön, Armin Tuchscherer, Norbert Reinsch, Joachim M Weitzel</p>
+                <p style="margin: 5px 0 0 0; font-size: 0.9em;"><strong>Institution:</strong> Leibniz Institute for Farm Animal Biology (FBN), Dummerstorf, Germany</p>
+                <p style="margin: 10px 0 0 0;">
+                    <a href="https://rep.bioscientifica.com/view/journals/rep/161/6/REP-20-0563.xml" 
+                       target="_blank" 
+                       style="color: #74b9ff; text-decoration: none; font-weight: bold; border: 1px solid #74b9ff; padding: 5px 10px; border-radius: 3px; display: inline-block;">
+                        🔗 View Original Paper
+                    </a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Paper Information & References</div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60; margin-bottom: 30px;">
+                    <p><strong>Citation:</strong> Langhammer, M., Wytrwat, E., Michaelis, M., Schön, J., Tuchscherer, A., Reinsch, N., & Weitzel, J. M. (2021). Two mouse lines selected for large litter size display different lifetime fecundities. Reproduction, 161(6), 721-730.</p>
+                    
+                    <p><strong>Key References from the Paper:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Holt, M., et al. (2004, 2005). Norwegian selection line studies</li>
+                        <li>Dietl, G., et al. (2004). FZTDU founder population establishment</li>
+                        <li>Michaelis, M., et al. (2013). Initial FL characterization</li>
+                        <li>Silver, L.M. (1995). Mouse Genetics - Concepts and Applications</li>
+                    </ul>
+                </div>
+                
+                <div class="section-title">Mouse Line Characteristics</div>
+                
+                <div class="line-comparison">
+                    <div class="line-box fl1-box">
+                        <div class="line-title">FL1 (Fertility Line 1)</div>
+                        <div class="step-details">
+                            <strong>Selection:</strong> >181 generations<br>
+                            <strong>Strategy:</strong> Balanced fertility<br>
+                            <strong>Litter size:</strong> 20.6 pups<br>
+                            <strong>Lifetime:</strong> 85.7 pups total<br>
+                            <strong>Max litters:</strong> 9 litters
+                        </div>
+                    </div>
+                    
+                    <div class="line-box fl2-box">
+                        <div class="line-title">FL2 (Fertility Line 2)</div>
+                        <div class="step-details">
+                            <strong>Selection:</strong> >181 generations<br>
+                            <strong>Strategy:</strong> Maximum litter size<br>
+                            <strong>Litter size:</strong> 21.4 pups<br>
+                            <strong>Lifetime:</strong> 53.2 pups total<br>
+                            <strong>Max litters:</strong> 6 litters
+                        </div>
+                    </div>
+                    
+                    <div class="line-box ctrl-box">
+                        <div class="line-title">CTRL (Control)</div>
+                        <div class="step-details">
+                            <strong>Selection:</strong> Unselected<br>
+                            <strong>Strategy:</strong> Natural fertility<br>
+                            <strong>Litter size:</strong> 11.5 pups<br>
+                            <strong>Lifetime:</strong> 61.6 pups total<br>
+                            <strong>Max litters:</strong> 10 litters
+                        </div>
+                    </div>
+                    
+                    <div class="line-box du6-box">
+                        <div class="line-title">DU6 (Growth)</div>
+                        <div class="step-details">
+                            <strong>Selection:</strong> High body weight<br>
+                            <strong>Strategy:</strong> Growth focused<br>
+                            <strong>Litter size:</strong> 10.4 pups<br>
+                            <strong>Lifetime:</strong> 18.0 pups total<br>
+                            <strong>Max litters:</strong> 5 litters
+                        </div>
+                    </div>
+                    
+                    <div class="line-box du6p-box">
+                        <div class="line-title">DU6P (Protein)</div>
+                        <div class="step-details">
+                            <strong>Selection:</strong> High protein mass<br>
+                            <strong>Strategy:</strong> Protein focused<br>
+                            <strong>Litter size:</strong> 12.3 pups<br>
+                            <strong>Lifetime:</strong> 35.1 pups total<br>
+                            <strong>Max litters:</strong> 5 litters
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-title">Detailed Experimental Design Flow</div>
+                
+                <div class="flow-container">
+                    
+                    <div class="flow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Historical Foundation and Line Development</div>
+                            <div class="step-details">
+                                Long-term selection experiment spanning multiple decades
+                                <div class="step-specs">
+                                    <strong>Timeline:</strong> Started 1970s, >45 years of selection<br>
+                                    <strong>Founder population:</strong> FZTDU (4 inbred + 4 outbred lines)<br>
+                                    <strong>Selection criterion:</strong> 1.6 × litter size + total birth weight (g)<br>
+                                    <strong>Generation interval:</strong> Short (single litter per dam)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Lifetime Fecundity Study Design</div>
+                            <div class="step-details">
+                                Comprehensive lifetime reproductive assessment protocol
+                                <div class="step-specs">
+                                    <strong>Sample sizes:</strong> FL1 (50), FL2 (60), CTRL (50), DU6 (30), DU6P (30)<br>
+                                    <strong>Mating protocol:</strong> 1:1 ratio, 2-week mating + 3-week observation<br>
+                                    <strong>Standardization:</strong> Litters adjusted to 10 pups post-birth<br>
+                                    <strong>Weaning:</strong> 21 days, then immediate re-mating
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Breeding Protocol and Buck Rotation</div>
+                            <div class="step-details">
+                                Systematic approach to minimize male effects
+                                <div class="step-specs">
+                                    <strong>Buck selection:</strong> Same line as female<br>
+                                    <strong>Rotation system:</strong> 3-4 rounds per buck maximum<br>
+                                    <strong>Failed conception:</strong> Second mating attempt with different buck<br>
+                                    <strong>Removal criteria:</strong> No offspring after 2 mating rounds
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Health Monitoring and Record Keeping</div>
+                            <div class="step-details">
+                                Comprehensive health and performance tracking
+                                <div class="step-specs">
+                                    <strong>Daily observation:</strong> Health status assessment<br>
+                                    <strong>Weight recording:</strong> Female weight at each mating round<br>
+                                    <strong>Gestation tracking:</strong> Length recorded for each litter<br>
+                                    <strong>Removal reasons:</strong> Fertility failure vs health problems documented
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Data Collection and Measurements</div>
+                            <div class="step-details">
+                                Systematic measurement protocol throughout lifetime
+                                <div class="step-specs">
+                                    <strong>Litter traits:</strong> Size, birth weight, standardization records<br>
+                                    <strong>Temporal data:</strong> Mating to birth intervals, gestation length<br>
+                                    <strong>Survival data:</strong> Age at removal, reason for termination<br>
+                                    <strong>Reproductive success:</strong> Number of successful matings per female
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <div class="step-title">Statistical Analysis Framework</div>
+                            <div class="step-details">
+                                Advanced survival and mixed model analysis
+                                <div class="step-specs">
+                                    <strong>Software:</strong> R 3.5.2 and SAS 9.4<br>
+                                    <strong>Models:</strong> GLIMMIX (Poisson), LIFETEST (Kaplan-Meier)<br>
+                                    <strong>Comparisons:</strong> Tukey-Kramer multiple comparisons<br>
+                                    <strong>Fixed effects:</strong> Line, litter number, group effects
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="section-title">Lifetime Fecundity Results Summary</div>
+                
+                <table class="fecundity-table">
+                    <thead>
+                        <tr>
+                            <th>Mouse Line</th>
+                            <th>Avg Litters/Female</th>
+                            <th>Total Pups/Lifetime</th>
+                            <th>Max Litters Observed</th>
+                            <th>Days in Experiment</th>
+                            <th>Silver Index</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>FL1</strong></td>
+                            <td>5.3</td>
+                            <td>85.7 ± 3.3</td>
+                            <td>9</td>
+                            <td>385</td>
+                            <td>101.2</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FL2</strong></td>
+                            <td>2.7</td>
+                            <td>53.2 ± 3.0</td>
+                            <td>6</td>
+                            <td>269</td>
+                            <td>52.1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CTRL</strong></td>
+                            <td>5.8</td>
+                            <td>61.6 ± 3.1</td>
+                            <td>10</td>
+                            <td>393</td>
+                            <td>67.1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DU6</strong></td>
+                            <td>1.9</td>
+                            <td>18.0 ± 1.6</td>
+                            <td>5</td>
+                            <td>223</td>
+                            <td>12.5</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DU6P</strong></td>
+                            <td>3.3</td>
+                            <td>35.1</td>
+                            <td>5</td>
+                            <td>267</td>
+                            <td>35.1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">Why, How, What Analysis</div>
+                
+                <div class="analysis-grid">
+                    <div class="analysis-card why-card">
+                        <div class="analysis-title">WHY - Research Motivation</div>
+                        <div class="step-details">
+                            <strong>Economic Importance:</strong> Lifetime fecundity more relevant than single-litter performance for agricultural applications.
+                            
+                            <ul>
+                                <li><strong>Agricultural relevance:</strong> Farm animals valued for <span class="highlight">lifetime productivity</span></li>
+                                <li><strong>Sustainability focus:</strong> Long-term reproductive performance vs short-term gains</li>
+                                <li><strong>Model validation:</strong> Test whether first-litter selection improves lifetime outcomes</li>
+                                <li><strong>Strategy comparison:</strong> Different genetic approaches to high fertility</li>
+                            </ul>
+                            
+                            <strong>Knowledge Gap:</strong> Limited understanding of long-term consequences of fertility selection in mammals.
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-card how-card">
+                        <div class="analysis-title">HOW - Methodology Innovation</div>
+                        <div class="step-details">
+                            <strong>Comprehensive Approach:</strong> First systematic lifetime fecundity comparison of long-term selected mouse lines.
+                            
+                            <ul>
+                                <li><strong>Long-term selection:</strong> >181 generations of documented selection</li>
+                                <li><strong>Multiple strategies:</strong> Compare FL1 vs FL2 approaches</li>
+                                <li><strong>Control comparisons:</strong> Include unselected and negative controls</li>
+                                <li><strong>Health monitoring:</strong> Distinguish fertility vs health-related removal</li>
+                            </ul>
+                            
+                            <strong>Validation Protocol:</strong> Standardized breeding protocol eliminates environmental confounding factors.
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-card what-card">
+                        <div class="analysis-title">WHAT - Key Discoveries</div>
+                        <div class="step-details">
+                            <strong>Major Findings:</strong> Two distinct strategies for achieving high fertility with different lifetime outcomes.
+                            
+                            <ul>
+                                <li><span class="highlight">FL1 Strategy:</span> Balanced - highest lifetime productivity (101.2 Silver index)</li>
+                                <li><span class="highlight">FL2 Strategy:</span> Intensive - highest single litters but reduced lifetime</li>
+                                <li><span class="highlight">Health correlation:</span> High fertility associated with better general health</li>
+                                <li><span class="highlight">Trade-offs revealed:</span> Maximum vs sustainable fertility strategies</li>
+                            </ul>
+                            
+                            <strong>Practical Impact:</strong> Provides framework for evaluating breeding strategies in agricultural species.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Back Navigation -->
+        <div style="margin-top: 60px; text-align: right; padding-right: 30px;">
+            <a href="../index.html" style="color: #64748b; text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 0; display: inline-block; position: relative; transition: color 0.3s ease;">
+                ← Back to Index
+            </a>
+        </div>
+    </div>
+</body>
+</html>

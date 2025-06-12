@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literature Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .search-container {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-select {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        
+        .clear-filters {
+            padding: 8px 15px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        
+        .results-info {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .paper {
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            padding: 20px;
+        }
+        
+        .paper-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .paper-authors {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        
+        .paper-year {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .paper-keywords {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .paper-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .paper-links a {
+            text-decoration: underline;
+            color: #0066cc;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        @media (max-width: 600px) {
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                justify-content: space-between;
+            }
+            
+            .paper-links {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Literature Review</h1>
+    
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search papers...">
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label>Year:</label>
+                <select class="filter-select" id="yearFilter">
+                    <option value="">All</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Topic:</label>
+                <select class="filter-select" id="topicFilter">
+                    <option value="">All</option>
+                </select>
+            </div>
+            
+            <button class="clear-filters" id="clearFilters">Clear</button>
+        </div>
+    </div>
+    
+    <div class="results-info" id="resultsInfo"></div>
+    
+    <div id="papersContainer"></div>
+
+    <script>
+        // COMPLETE papers array - replace your entire papers array with this:
+
+const papers = [
+    {
+        id: 1,
+        title: "Relationship between litter size at birth and within-litter birth weight characteristics in laboratory mice as pilot animal for pig",
+        authors: ["Ogawa, S.", "Satoh, M."],
+        year: 2020,
+        keywords: ["litter size", "birth weight variation", "laboratory mice", "pig model", "within-litter characteristics", "genetic parameters", "reproductive traits", "animal breeding", "correlation analysis"],
+        topic: "Reproductive Biology",
+        reviewLink: "./reviews/2020_ogawa.html",
+        originalLink: "https://onlinelibrary.wiley.com/doi/10.1111/asj.13488"
+    },
+    {
+        id: 2,
+        title: "Two mouse lines selected for large litter size display different lifetime fecundities",
+        authors: ["Langhammer, M.", "Wytrwat, E.", "Michaelis, M.", "Schön, J.", "Tuchscherer, A.", "Reinsch, N.", "Weitzel, J.M."],
+        year: 2021,
+        keywords: ["lifetime fecundity", "selection experiment", "mouse models", "fertility strategies", "reproductive longevity", "breeding programs", "genetic selection", "FL1", "FL2", "sustainable breeding"],
+        topic: "Long-term Selection",
+        reviewLink: "./reviews/2021_langhammer.html",
+        originalLink: "https://rep.bioscientifica.com/view/journals/rep/161/6/REP-20-0563.xml"
+    },
+    {
+        id: 3,
+        title: "Effects of genotype, gestation length and litter size on the birth weight, litter weight, pre- and post-weaning weight of crossbred kits",
+        authors: ["Olateju, I.S.", "Chineke, C.A."],
+        year: 2022,
+        keywords: ["rabbit crossbreeding", "genotype effects", "gestation length", "litter size", "birth weight", "kit performance", "breeding strategies", "tropical conditions", "correlation analysis", "agricultural breeding"],
+        topic: "Crossbreeding Studies",
+        reviewLink: "./reviews/2022_olateju.html",
+        originalLink: "https://doi.org/10.1186/s42269-022-00843-8"
+    }
+];
+
+
+        const years = [...new Set(papers.map(p => p.year))].sort((a, b) => b - a);
+        const topics = [...new Set(papers.map(p => p.topic))].sort();
+
+        function populateFilters() {
+            const yearSelect = document.getElementById('yearFilter');
+            const topicSelect = document.getElementById('topicFilter');
+
+            years.forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearSelect.appendChild(option);
+            });
+
+            topics.forEach(topic => {
+                const option = document.createElement('option');
+                option.value = topic;
+                option.textContent = topic;
+                topicSelect.appendChild(option);
+            });
+        }
+
+        function createPaperHTML(paper) {
+            const authorsText = paper.authors.join(', ');
+            const keywordsText = paper.keywords.join(', ');
+
+            return `
+                <div class="paper">
+                    <div class="paper-title">${paper.title}</div>
+                    <div class="paper-authors">${authorsText}</div>
+                    <div class="paper-year">${paper.year}</div>
+                    <div class="paper-keywords">Keywords: ${keywordsText}</div>
+                    <div class="paper-links">
+                        <a href="${paper.reviewLink}">My Review</a>
+                        <a href="${paper.originalLink}" target="_blank">Original Paper</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterPapers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedYear = document.getElementById('yearFilter').value;
+            const selectedTopic = document.getElementById('topicFilter').value;
+
+            let filteredPapers = papers.filter(paper => {
+                const matchesSearch = !searchTerm || 
+                    paper.title.toLowerCase().includes(searchTerm) ||
+                    paper.authors.some(author => author.toLowerCase().includes(searchTerm)) ||
+                    paper.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm)) ||
+                    paper.year.toString().includes(searchTerm);
+
+                const matchesYear = !selectedYear || paper.year.toString() === selectedYear;
+                const matchesTopic = !selectedTopic || paper.topic === selectedTopic;
+
+                return matchesSearch && matchesYear && matchesTopic;
+            });
+
+            displayPapers(filteredPapers);
+            updateResultsInfo(filteredPapers.length, papers.length);
+        }
+
+        function displayPapers(papersToShow) {
+            const container = document.getElementById('papersContainer');
+            
+            if (papersToShow.length === 0) {
+                container.innerHTML = '<div class="no-results">No papers found</div>';
+            } else {
+                container.innerHTML = papersToShow.map(createPaperHTML).join('');
+            }
+        }
+
+        function updateResultsInfo(shown, total) {
+            const info = document.getElementById('resultsInfo');
+            info.textContent = `Showing ${shown} of ${total} papers`;
+        }
+
+        function clearAllFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('yearFilter').value = '';
+            document.getElementById('topicFilter').value = '';
+            filterPapers();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            populateFilters();
+            displayPapers(papers);
+            updateResultsInfo(papers.length, papers.length);
+
+            document.getElementById('searchInput').addEventListener('input', filterPapers);
+            document.getElementById('yearFilter').addEventListener('change', filterPapers);
+            document.getElementById('topicFilter').addEventListener('change', filterPapers);
+            document.getElementById('clearFilters').addEventListener('click', clearAllFilters);
+        });
+    </script>
+    
+ <script>
+// Store scroll position when clicking on review links
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click handlers to all review links
+    const reviewLinks = document.querySelectorAll('a[href*="./reviews/"]');
+    reviewLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Store current scroll position
+            sessionStorage.setItem('indexScrollPosition', window.pageYOffset);
+        });
+    });
+    
+    // Restore scroll position when returning to index
+    const savedPosition = sessionStorage.getItem('indexScrollPosition');
+    if (savedPosition) {
+        window.scrollTo(0, parseInt(savedPosition));
+        // Clear the stored position after using it
+        sessionStorage.removeItem('indexScrollPosition');
+    }
+});
+</script>
+</body>
+</html>
