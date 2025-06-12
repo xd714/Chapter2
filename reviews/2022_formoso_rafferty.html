@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birth Weight Variability and Reproductive Longevity Research Flow</title>
+    <title>Lifetime Fecundity Research Flow</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,13 +19,80 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             overflow: hidden;
+            position: relative;
+        }
+        
+        /* TOP LEFT NAVIGATION */
+        .top-left-nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .top-left-nav a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .top-left-nav a:hover {
+            background: rgba(0,0,0,0.4);
+            color: white;
+        }
+        
+        /* BACK TO TOP BUTTON */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #27ae60;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+        
+        .back-to-top::before {
+            content: '↑';
+            font-size: 20px;
+            font-weight: bold;
         }
         
         .header {
             background: #2c3e50;
             color: white;
-            padding: 20px;
+            padding: 60px 20px 20px 20px;
             text-align: center;
+            position: relative;
         }
         
         .header h1 {
@@ -46,7 +113,7 @@
             font-weight: bold;
             color: #2c3e50;
             margin-bottom: 20px;
-            border-bottom: 2px solid #9b59b6;
+            border-bottom: 2px solid #27ae60;
             padding-bottom: 5px;
         }
         
@@ -66,7 +133,7 @@
         }
         
         .step-number {
-            background: #9b59b6;
+            background: #27ae60;
             color: white;
             width: 40px;
             height: 40px;
@@ -83,7 +150,7 @@
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
-            border-left: 4px solid #9b59b6;
+            border-left: 4px solid #27ae60;
         }
         
         .step-title {
@@ -99,7 +166,7 @@
         }
         
         .step-specs {
-            background: #f4f1f8;
+            background: #e8f6f3;
             padding: 10px;
             margin-top: 10px;
             border-radius: 5px;
@@ -108,30 +175,36 @@
         
         .line-comparison {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
             margin: 20px 0;
         }
         
         .line-box {
             background: #f8f9fa;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
             border: 2px solid #ddd;
             text-align: center;
         }
         
-        .low-line { border-color: #27ae60; }
-        .high-line { border-color: #e74c3c; }
+        .fl1-box { border-color: #e74c3c; }
+        .fl2-box { border-color: #f39c12; }
+        .ctrl-box { border-color: #3498db; }
+        .du6-box { border-color: #9b59b6; }
+        .du6p-box { border-color: #1abc9c; }
         
         .line-title {
             font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-size: 1.0em;
         }
         
-        .low-line .line-title { color: #27ae60; }
-        .high-line .line-title { color: #e74c3c; }
+        .fl1-box .line-title { color: #e74c3c; }
+        .fl2-box .line-title { color: #f39c12; }
+        .ctrl-box .line-title { color: #3498db; }
+        .du6-box .line-title { color: #9b59b6; }
+        .du6p-box .line-title { color: #1abc9c; }
         
         /* Analysis Sections */
         .analysis-grid {
@@ -145,7 +218,7 @@
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
-            border-top: 4px solid #9b59b6;
+            border-top: 4px solid #27ae60;
         }
         
         .analysis-title {
@@ -155,11 +228,11 @@
         }
         
         .why-card { border-top-color: #e74c3c; }
-        .how-card { border-top-color: #9b59b6; }
-        .what-card { border-top-color: #27ae60; }
+        .how-card { border-top-color: #27ae60; }
+        .what-card { border-top-color: #3498db; }
         
         .highlight {
-            background: #f4f1f8;
+            background: #d5f4e6;
             padding: 2px 4px;
             border-radius: 3px;
         }
@@ -173,56 +246,52 @@
             margin-bottom: 8px;
         }
         
-        .results-table {
+        .fecundity-table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
             background: white;
         }
         
-        .results-table th,
-        .results-table td {
+        .fecundity-table th,
+        .fecundity-table td {
             border: 1px solid #ddd;
             padding: 12px;
             text-align: center;
         }
         
-        .results-table th {
-            background: #9b59b6;
+        .fecundity-table th {
+            background: #27ae60;
             color: white;
             font-weight: bold;
         }
         
-        .results-table tr:nth-child(even) {
+        .fecundity-table tr:nth-child(even) {
             background: #f8f9fa;
         }
         
-        .superior-performance {
-            background: #d5f4e6 !important;
-            font-weight: bold;
-        }
-        
-        .statistical-model {
-            background: #ecf0f1;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
-            border-left: 4px solid #9b59b6;
-            font-family: monospace;
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- TOP LEFT NAVIGATION -->
+        <div class="top-left-nav">
+            <a href="../index.html">← Back to Index</a>
+        </div>
+        
         <div class="header">
-            <h1>Impact of selection for birth weight variability on reproductive longevity: A mice model</h1>
-            <p>Divergent Selection Experiment for Birth Weight Uniformity</p>
+            <h1>Two mouse lines selected for large litter size display different lifetime fecundities</h1>
+            <p>Long-term Selection Experiment Analysis</p>
             
             <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
-                <p style="margin: 0; font-size: 0.9em;"><strong>Authors:</strong> Nora Formoso-Rafferty, Juan Pablo Gutiérrez, Andrés García-Álvarez, Teresa Pérez, Isabel Cervantes</p>
-                <p style="margin: 5px 0 0 0; font-size: 0.9em;"><strong>Institution:</strong> Universidad Politécnica de Madrid & Universidad Complutense de Madrid, Spain</p>
+                <p style="margin: 0; font-size: 0.9em;"><strong>Authors:</strong> Martina Langhammer, Erika Wytrwat, Marten Michaelis, Jennifer Schön, Armin Tuchscherer, Norbert Reinsch, Joachim M Weitzel</p>
+                <p style="margin: 5px 0 0 0; font-size: 0.9em;"><strong>Institution:</strong> Leibniz Institute for Farm Animal Biology (FBN), Dummerstorf, Germany</p>
                 <p style="margin: 10px 0 0 0;">
-                    <a href="https://doi.org/10.1111/jbg.12676" 
+                    <a href="https://rep.bioscientifica.com/view/journals/rep/161/6/REP-20-0563.xml" 
                        target="_blank" 
                        style="color: #74b9ff; text-decoration: none; font-weight: bold; border: 1px solid #74b9ff; padding: 5px 10px; border-radius: 3px; display: inline-block;">
                         🔗 View Original Paper
@@ -235,40 +304,73 @@
             <div class="section">
                 <div class="section-title">Paper Information & References</div>
                 
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #9b59b6; margin-bottom: 30px;">
-                    <p><strong>Citation:</strong> Formoso-Rafferty, N., Gutiérrez, J. P., García-Álvarez, A., Pérez, T., & Cervantes, I. (2022). Impact of selection for birth weight variability on reproductive longevity: A mice model. Journal of Animal Breeding and Genetics, 139(4), 370-379.</p>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60; margin-bottom: 30px;">
+                    <p><strong>Citation:</strong> Langhammer, M., Wytrwat, E., Michaelis, M., Schön, J., Tuchscherer, A., Reinsch, N., & Weitzel, J. M. (2021). Two mouse lines selected for large litter size display different lifetime fecundities. Reproduction, 161(6), 721-730.</p>
                     
                     <p><strong>Key References from the Paper:</strong></p>
                     <ul style="margin-top: 10px;">
-                        <li>Formoso-Rafferty, N., et al. (2016a, 2016b). Original divergent selection experiment</li>
-                        <li>Bolet, G., et al. (2007). Genetic homogenisation of birth weight in rabbits</li>
-                        <li>Prentice, R.L., et al. (1981). Regression analysis of multivariate failure time data</li>
-                        <li>Therneau, T.M. & Lumley, T. (2015). Survival package in R</li>
+                        <li>Holt, M., et al. (2004, 2005). Norwegian selection line studies</li>
+                        <li>Dietl, G., et al. (2004). FZTDU founder population establishment</li>
+                        <li>Michaelis, M., et al. (2013). Initial FL characterization</li>
+                        <li>Silver, L.M. (1995). Mouse Genetics - Concepts and Applications</li>
                     </ul>
                 </div>
                 
-                <div class="section-title">Divergent Selection Lines Overview</div>
+                <div class="section-title">Mouse Line Characteristics</div>
                 
                 <div class="line-comparison">
-                    <div class="line-box low-line">
-                        <div class="line-title">LOW Variability Line</div>
+                    <div class="line-box fl1-box">
+                        <div class="line-title">FL1 (Fertility Line 1)</div>
                         <div class="step-details">
-                            <strong>Selection goal:</strong> Homogeneous birth weights<br>
-                            <strong>BW within-litter SD:</strong> 0.0891 ± 0.0066 g<br>
-                            <strong>Strategy:</strong> Reduced environmental variability<br>
-                            <strong>Previous benefits:</strong> Higher litter size, survival, feed efficiency<br>
-                            <strong>Reproductive longevity:</strong> <strong>SUPERIOR</strong>
+                            <strong>Selection:</strong> >181 generations<br>
+                            <strong>Strategy:</strong> Balanced fertility<br>
+                            <strong>Litter size:</strong> 20.6 pups<br>
+                            <strong>Lifetime:</strong> 85.7 pups total<br>
+                            <strong>Max litters:</strong> 9 litters
                         </div>
                     </div>
                     
-                    <div class="line-box high-line">
-                        <div class="line-title">HIGH Variability Line</div>
+                    <div class="line-box fl2-box">
+                        <div class="line-title">FL2 (Fertility Line 2)</div>
                         <div class="step-details">
-                            <strong>Selection goal:</strong> Heterogeneous birth weights<br>
-                            <strong>BW within-litter SD:</strong> 0.2131 ± 0.0147 g<br>
-                            <strong>Strategy:</strong> Increased environmental variability<br>
-                            <strong>Characteristics:</strong> Higher individual weights<br>
-                            <strong>Reproductive longevity:</strong> Reduced
+                            <strong>Selection:</strong> >181 generations<br>
+                            <strong>Strategy:</strong> Maximum litter size<br>
+                            <strong>Litter size:</strong> 21.4 pups<br>
+                            <strong>Lifetime:</strong> 53.2 pups total<br>
+                            <strong>Max litters:</strong> 6 litters
+                        </div>
+                    </div>
+                    
+                    <div class="line-box ctrl-box">
+                        <div class="line-title">CTRL (Control)</div>
+                        <div class="step-details">
+                            <strong>Selection:</strong> Unselected<br>
+                            <strong>Strategy:</strong> Natural fertility<br>
+                            <strong>Litter size:</strong> 11.5 pups<br>
+                            <strong>Lifetime:</strong> 61.6 pups total<br>
+                            <strong>Max litters:</strong> 10 litters
+                        </div>
+                    </div>
+                    
+                    <div class="line-box du6-box">
+                        <div class="line-title">DU6 (Growth)</div>
+                        <div class="step-details">
+                            <strong>Selection:</strong> High body weight<br>
+                            <strong>Strategy:</strong> Growth focused<br>
+                            <strong>Litter size:</strong> 10.4 pups<br>
+                            <strong>Lifetime:</strong> 18.0 pups total<br>
+                            <strong>Max litters:</strong> 5 litters
+                        </div>
+                    </div>
+                    
+                    <div class="line-box du6p-box">
+                        <div class="line-title">DU6P (Protein)</div>
+                        <div class="step-details">
+                            <strong>Selection:</strong> High protein mass<br>
+                            <strong>Strategy:</strong> Protein focused<br>
+                            <strong>Litter size:</strong> 12.3 pups<br>
+                            <strong>Lifetime:</strong> 35.1 pups total<br>
+                            <strong>Max litters:</strong> 5 litters
                         </div>
                     </div>
                 </div>
@@ -280,14 +382,14 @@
                     <div class="flow-step">
                         <div class="step-number">1</div>
                         <div class="step-content">
-                            <div class="step-title">Historical Selection Background</div>
+                            <div class="step-title">Historical Foundation and Line Development</div>
                             <div class="step-details">
-                                Long-term divergent selection experiment for birth weight variability
+                                Long-term selection experiment spanning multiple decades
                                 <div class="step-specs">
-                                    <strong>Selection duration:</strong> 23 generations of divergent selection<br>
-                                    <strong>Starting generation:</strong> Generation 20 and 21 used for longevity study<br>
-                                    <strong>Selection criterion:</strong> Environmental variability (residual variance)<br>
-                                    <strong>Mating design:</strong> Weighted selection determined by simulated annealing
+                                    <strong>Timeline:</strong> Started 1970s, >45 years of selection<br>
+                                    <strong>Founder population:</strong> FZTDU (4 inbred + 4 outbred lines)<br>
+                                    <strong>Selection criterion:</strong> 1.6 × litter size + total birth weight (g)<br>
+                                    <strong>Generation interval:</strong> Short (single litter per dam)
                                 </div>
                             </div>
                         </div>
@@ -296,14 +398,14 @@
                     <div class="flow-step">
                         <div class="step-number">2</div>
                         <div class="step-content">
-                            <div class="step-title">Reproductive Longevity Study Design</div>
+                            <div class="step-title">Lifetime Fecundity Study Design</div>
                             <div class="step-details">
-                                Comprehensive lifetime reproductive performance assessment
+                                Comprehensive lifetime reproductive assessment protocol
                                 <div class="step-specs">
-                                    <strong>Sample size:</strong> 172 females total (86 from each line)<br>
-                                    <strong>Generations tested:</strong> 20th and 21st generation<br>
-                                    <strong>Mating protocol:</strong> One male to one female, stayed together permanently<br>
-                                    <strong>Termination criteria:</strong> 63 days elapsed from last parturition
+                                    <strong>Sample sizes:</strong> FL1 (50), FL2 (60), CTRL (50), DU6 (30), DU6P (30)<br>
+                                    <strong>Mating protocol:</strong> 1:1 ratio, 2-week mating + 3-week observation<br>
+                                    <strong>Standardization:</strong> Litters adjusted to 10 pups post-birth<br>
+                                    <strong>Weaning:</strong> 21 days, then immediate re-mating
                                 </div>
                             </div>
                         </div>
@@ -312,14 +414,14 @@
                     <div class="flow-step">
                         <div class="step-number">3</div>
                         <div class="step-content">
-                            <div class="step-title">Data Collection Protocol</div>
+                            <div class="step-title">Breeding Protocol and Buck Rotation</div>
                             <div class="step-details">
-                                Systematic recording of reproductive events and performance
+                                Systematic approach to minimize male effects
                                 <div class="step-specs">
-                                    <strong>Parturition monitoring:</strong> Daily checks during parturition period<br>
-                                    <strong>Litter traits:</strong> Litter size at birth (LSB) and weaning (LSW)<br>
-                                    <strong>Timing data:</strong> Interval between parturitions (IBP)<br>
-                                    <strong>Longevity measure:</strong> Length of reproductive life (LRL)
+                                    <strong>Buck selection:</strong> Same line as female<br>
+                                    <strong>Rotation system:</strong> 3-4 rounds per buck maximum<br>
+                                    <strong>Failed conception:</strong> Second mating attempt with different buck<br>
+                                    <strong>Removal criteria:</strong> No offspring after 2 mating rounds
                                 </div>
                             </div>
                         </div>
@@ -328,14 +430,46 @@
                     <div class="flow-step">
                         <div class="step-number">4</div>
                         <div class="step-content">
+                            <div class="step-title">Health Monitoring and Record Keeping</div>
+                            <div class="step-details">
+                                Comprehensive health and performance tracking
+                                <div class="step-specs">
+                                    <strong>Daily observation:</strong> Health status assessment<br>
+                                    <strong>Weight recording:</strong> Female weight at each mating round<br>
+                                    <strong>Gestation tracking:</strong> Length recorded for each litter<br>
+                                    <strong>Removal reasons:</strong> Fertility failure vs health problems documented
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Data Collection and Measurements</div>
+                            <div class="step-details">
+                                Systematic measurement protocol throughout lifetime
+                                <div class="step-specs">
+                                    <strong>Litter traits:</strong> Size, birth weight, standardization records<br>
+                                    <strong>Temporal data:</strong> Mating to birth intervals, gestation length<br>
+                                    <strong>Survival data:</strong> Age at removal, reason for termination<br>
+                                    <strong>Reproductive success:</strong> Number of successful matings per female
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
                             <div class="step-title">Statistical Analysis Framework</div>
                             <div class="step-details">
-                                Advanced survival analysis and mixed model approaches
+                                Advanced survival and mixed model analysis
                                 <div class="step-specs">
-                                    <strong>Linear mixed models:</strong> LSB, LSW, IBP comparisons<br>
-                                    <strong>Cox proportional hazard:</strong> Length of reproductive life analysis<br>
-                                    <strong>Prentice-Williams-Peterson:</strong> Rate of parturitions model<br>
-                                    <strong>Software:</strong> SAS for mixed models, R survival package
+                                    <strong>Software:</strong> R 3.5.2 and SAS 9.4<br>
+                                    <strong>Models:</strong> GLIMMIX (Poisson), LIFETEST (Kaplan-Meier)<br>
+                                    <strong>Comparisons:</strong> Tukey-Kramer multiple comparisons<br>
+                                    <strong>Fixed effects:</strong> Line, litter number, group effects
                                 </div>
                             </div>
                         </div>
@@ -343,82 +477,59 @@
                     
                 </div>
                 
-                <div class="section-title">Mathematical Models</div>
+                <div class="section-title">Lifetime Fecundity Results Summary</div>
                 
-                <div class="statistical-model">
-                    <strong>Mixed Model for LSB, LSW, IBP:</strong><br>
-                    y_ijkl = μ + l_i + g_j + lg_ij + p_k + f_l + ε_ijkl<br><br>
-                    Where: l_i = line effect, g_j = generation effect, lg_ij = interaction,<br>
-                    p_k = parturition number, f_l = random female effect
-                </div>
-                
-                <div class="statistical-model">
-                    <strong>Cox Proportional Hazard Model:</strong><br>
-                    h_i(t) = h_0(t)exp(βX_i)<br><br>
-                    Where: h_i(t) = hazard for female i at time t,<br>
-                    h_0(t) = baseline hazard, β = regression parameters, X_i = covariates
-                </div>
-                
-                <div class="statistical-model">
-                    <strong>Prentice-Williams-Peterson Model:</strong><br>
-                    h_ij(t) = h_0j(t)Y_ij(t)exp(β_jX_i(t))<br><br>
-                    For analyzing rate of new parturitions with recurrent events
-                </div>
-                
-                <div class="section-title">Key Results Summary</div>
-                
-                <table class="results-table">
+                <table class="fecundity-table">
                     <thead>
                         <tr>
-                            <th>Trait</th>
-                            <th>LOW Line</th>
-                            <th>HIGH Line</th>
-                            <th>Difference</th>
-                            <th>P-value</th>
+                            <th>Mouse Line</th>
+                            <th>Avg Litters/Female</th>
+                            <th>Total Pups/Lifetime</th>
+                            <th>Max Litters Observed</th>
+                            <th>Days in Experiment</th>
+                            <th>Silver Index</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="superior-performance">
-                            <td><strong>Litter Size at Birth</strong></td>
-                            <td>6.01 ± 0.17</td>
-                            <td>3.26 ± 0.25</td>
-                            <td>+2.75</td>
-                            <td>***</td>
+                        <tr>
+                            <td><strong>FL1</strong></td>
+                            <td>5.3</td>
+                            <td>85.7 ± 3.3</td>
+                            <td>9</td>
+                            <td>385</td>
+                            <td>101.2</td>
                         </tr>
-                        <tr class="superior-performance">
-                            <td><strong>Litter Size at Weaning</strong></td>
-                            <td>5.55 ± 0.19</td>
-                            <td>2.65 ± 0.27</td>
-                            <td>+2.90</td>
-                            <td>***</td>
+                        <tr>
+                            <td><strong>FL2</strong></td>
+                            <td>2.7</td>
+                            <td>53.2 ± 3.0</td>
+                            <td>6</td>
+                            <td>269</td>
+                            <td>52.1</td>
                         </tr>
-                        <tr class="superior-performance">
-                            <td><strong>Interval Between Parturitions</strong></td>
-                            <td>30.79 ± 0.70 days</td>
-                            <td>37.23 ± 1.05 days</td>
-                            <td>-6.44 days</td>
-                            <td>***</td>
+                        <tr>
+                            <td><strong>CTRL</strong></td>
+                            <td>5.8</td>
+                            <td>61.6 ± 3.1</td>
+                            <td>10</td>
+                            <td>393</td>
+                            <td>67.1</td>
                         </tr>
-                        <tr class="superior-performance">
-                            <td><strong>Median Reproductive Days</strong></td>
-                            <td>252.50 days</td>
-                            <td>55.50 days</td>
-                            <td>+197 days</td>
-                            <td><0.001</td>
+                        <tr>
+                            <td><strong>DU6</strong></td>
+                            <td>1.9</td>
+                            <td>18.0 ± 1.6</td>
+                            <td>5</td>
+                            <td>223</td>
+                            <td>12.5</td>
                         </tr>
-                        <tr class="superior-performance">
-                            <td><strong>Hazard Ratio (Longevity)</strong></td>
-                            <td>Reference</td>
-                            <td>HR = 0.26</td>
-                            <td>74% reduction risk</td>
-                            <td><0.001</td>
-                        </tr>
-                        <tr class="superior-performance">
-                            <td><strong>New Parturition Rate</strong></td>
-                            <td>Reference</td>
-                            <td>HR = 2.93</td>
-                            <td>3× higher rate</td>
-                            <td><0.001</td>
+                        <tr>
+                            <td><strong>DU6P</strong></td>
+                            <td>3.3</td>
+                            <td>35.1</td>
+                            <td>5</td>
+                            <td>267</td>
+                            <td>35.1</td>
                         </tr>
                     </tbody>
                 </table>
@@ -431,138 +542,76 @@
                     <div class="analysis-card why-card">
                         <div class="analysis-title">WHY - Research Motivation</div>
                         <div class="step-details">
-                            <strong>Critical Knowledge Gap:</strong> Understanding the relationship between uniformity and robustness in reproductive performance.
+                            <strong>Economic Importance:</strong> Lifetime fecundity more relevant than single-litter performance for agricultural applications.
                             
                             <ul>
-                                <li><strong>Uniformity benefits:</strong> Previously shown for <span class="highlight">litter size, survival, feed efficiency</span></li>
-                                <li><strong>Robustness indicators:</strong> Need to assess long-term reproductive fitness</li>
-                                <li><strong>Agricultural relevance:</strong> Longevity economically important in livestock production</li>
-                                <li><strong>Model validation:</strong> Test whether <span class="highlight">birth weight uniformity</span> affects lifetime performance</li>
+                                <li><strong>Agricultural relevance:</strong> Farm animals valued for <span class="highlight">lifetime productivity</span></li>
+                                <li><strong>Sustainability focus:</strong> Long-term reproductive performance vs short-term gains</li>
+                                <li><strong>Model validation:</strong> Test whether first-litter selection improves lifetime outcomes</li>
+                                <li><strong>Strategy comparison:</strong> Different genetic approaches to high fertility</li>
                             </ul>
                             
-                            <strong>Hypothesis:</strong> Selection for birth weight uniformity (low variability) will improve reproductive longevity and robustness.
+                            <strong>Knowledge Gap:</strong> Limited understanding of long-term consequences of fertility selection in mammals.
                         </div>
                     </div>
                     
                     <div class="analysis-card how-card">
                         <div class="analysis-title">HOW - Methodology Innovation</div>
                         <div class="step-details">
-                            <strong>Comprehensive Survival Analysis:</strong> First systematic study of reproductive longevity in birth weight variability selected lines.
+                            <strong>Comprehensive Approach:</strong> First systematic lifetime fecundity comparison of long-term selected mouse lines.
                             
                             <ul>
-                                <li><strong>Divergent selection:</strong> 23 generations of selection for opposite traits</li>
-                                <li><strong>Lifetime assessment:</strong> Continuous mating until reproductive failure</li>
-                                <li><strong>Advanced statistics:</strong> Cox models + Prentice-Williams-Peterson models</li>
-                                <li><strong>Multiple measures:</strong> Time to reproductive end AND rate of new parturitions</li>
+                                <li><strong>Long-term selection:</strong> >181 generations of documented selection</li>
+                                <li><strong>Multiple strategies:</strong> Compare FL1 vs FL2 approaches</li>
+                                <li><strong>Control comparisons:</strong> Include unselected and negative controls</li>
+                                <li><strong>Health monitoring:</strong> Distinguish fertility vs health-related removal</li>
                             </ul>
                             
-                            <strong>Validation:</strong> Robust experimental design with appropriate controls and statistical power.
+                            <strong>Validation Protocol:</strong> Standardized breeding protocol eliminates environmental confounding factors.
                         </div>
                     </div>
                     
                     <div class="analysis-card what-card">
                         <div class="analysis-title">WHAT - Key Discoveries</div>
                         <div class="step-details">
-                            <strong>Dramatic Reproductive Advantages:</strong> Low variability line shows superior lifetime performance across all measures.
+                            <strong>Major Findings:</strong> Two distinct strategies for achieving high fertility with different lifetime outcomes.
                             
                             <ul>
-                                <li><span class="highlight">4.5× longer reproductive life:</span> 252.5 vs 55.5 days median</li>
-                                <li><span class="highlight">3× higher parturition rate:</span> HR = 2.93 for new parturitions</li>
-                                <li><span class="highlight">Larger, more frequent litters:</span> +2.75 pups, shorter intervals</li>
-                                <li><span class="highlight">Robustness confirmed:</span> Uniformity strongly linked to reproductive fitness</li>
+                                <li><span class="highlight">FL1 Strategy:</span> Balanced - highest lifetime productivity (101.2 Silver index)</li>
+                                <li><span class="highlight">FL2 Strategy:</span> Intensive - highest single litters but reduced lifetime</li>
+                                <li><span class="highlight">Health correlation:</span> High fertility associated with better general health</li>
+                                <li><span class="highlight">Trade-offs revealed:</span> Maximum vs sustainable fertility strategies</li>
                             </ul>
                             
-                            <strong>Practical Impact:</strong> Demonstrates uniformity as a valuable selection criterion for improving both productivity and sustainability.
+                            <strong>Practical Impact:</strong> Provides framework for evaluating breeding strategies in agricultural species.
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Detailed Results Analysis -->
-            <div class="section">
-                <div class="section-title">Detailed Findings Analysis</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">R1</div>
-                    <div class="step-content">
-                        <div class="step-title">Reproductive Performance Superiority</div>
-                        <div class="step-details">
-                            Low variability line consistently outperformed across all reproductive measures
-                            <div class="step-specs">
-                                <strong>Litter productivity:</strong> 84% higher litter size at birth, 109% at weaning<br>
-                                <strong>Reproductive efficiency:</strong> 21% shorter intervals between parturitions<br>
-                                <strong>Sustained performance:</strong> Benefits maintained across multiple parturitions<br>
-                                <strong>Statistical significance:</strong> All differences highly significant (P<0.001)
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flow-step">
-                    <div class="step-number">R2</div>
-                    <div class="step-content">
-                        <div class="step-title">Longevity Analysis Results</div>
-                        <div class="step-details">
-                            Survival analysis revealed dramatic differences in reproductive lifespan
-                            <div class="step-specs">
-                                <strong>Median longevity:</strong> Low line 252.5 days vs High line 55.5 days<br>
-                                <strong>Hazard ratio:</strong> 0.26 (95% CI: 0.16-0.41) for reproductive failure<br>
-                                <strong>Generation effect:</strong> Younger females had 60% higher parturition probability<br>
-                                <strong>Practical meaning:</strong> Low variability females reproduced 4.5× longer
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flow-step">
-                    <div class="step-number">R3</div>
-                    <div class="step-content">
-                        <div class="step-title">Parturition Rate Analysis</div>
-                        <div class="step-details">
-                            Rate of new parturitions significantly higher in uniform line
-                            <div class="step-specs">
-                                <strong>Hazard ratio:</strong> 2.93 (95% CI: 2.17-3.94) for new parturitions<br>
-                                <strong>Interpretation:</strong> Nearly 3× probability of having next litter<br>
-                                <strong>Consistency:</strong> Pattern maintained throughout reproductive life<br>
-                                <strong>Robustness indicator:</strong> Better adaptation to reproductive demands
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Implications Section -->
-            <div class="section">
-                <div class="section-title">Research Implications and Applications</div>
-                
-                <div style="background: #f4f1f8; padding: 20px; border-radius: 8px; border: 1px solid #d1c4e9; margin: 20px 0;">
-                    <div style="font-weight: bold; color: #7b1fa2; margin-bottom: 15px; font-size: 1.1em;">Agricultural Applications</div>
-                    
-                    <p><strong>Livestock Breeding Strategy:</strong></p>
-                    <ul>
-                        <li><strong>Selection criteria:</strong> Include within-litter uniformity as breeding objective</li>
-                        <li><strong>Sustainability focus:</strong> Prioritize longevity alongside productivity</li>
-                        <li><strong>Risk reduction:</strong> Uniform offspring reduce mortality and management costs</li>
-                        <li><strong>Economic benefits:</strong> Longer productive life = reduced replacement costs</li>
-                    </ul>
-                    
-                    <p><strong>Model Species Applications:</strong></p>
-                    <ul>
-                        <li><strong>Pig breeding:</strong> Address increased birth weight variability from litter size selection</li>
-                        <li><strong>Rabbit production:</strong> Apply uniformity principles to improve doe longevity</li>
-                        <li><strong>Poultry breeding:</strong> Consider uniformity in hatching weight optimization</li>
-                        <li><strong>Dairy cattle:</strong> Evaluate uniformity effects on productive lifespan</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Back Navigation -->
-        <div style="margin-top: 60px; text-align: right; padding-right: 30px;">
-            <a href="../index.html" style="color: #64748b; text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 0; display: inline-block; position: relative; transition: color 0.3s ease;">
-                ← Back to Index
-            </a>
         </div>
     </div>
+    
+    <!-- BACK TO TOP BUTTON -->
+    <div class="back-to-top" id="backToTop"></div>
+
+    <script>
+        // Back to top functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>
