@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Litter Size and Birth Weight Research Flow</title>
-     <link rel="stylesheet" href="style.css">
-
-
-
+    <link rel="stylesheet" href="style.css">
 
 <script>
 (function() {
@@ -62,21 +59,23 @@
     <div class="container">
         <!-- TOP LEFT NAVIGATION -->
         <div class="top-left-nav">
-            <a href="../index.html"> Back to Index</a>
+            <a href="../index.html">Back to Index</a>
         </div>
         
         <div class="header">
             <h1>Relationship between litter size at birth and within-litter birth weight characteristics in laboratory mice as pilot animal for pig</h1>
             <p>Detailed Material Flow and Research Analysis</p>
             
-            <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
-                <p style="margin: 0; font-size: 0.9em;"><strong>Authors:</strong> Shinichiro Ogawa, Masahiro Satoh</p>
-                <p style="margin: 5px 0 0 0; font-size: 0.9em;"><strong>Institution:</strong> Graduate School of Agricultural Science, Tohoku University, Sendai, Japan</p>
-                <p style="margin: 10px 0 0 0;">
+            <div class="header-info">
+                <p class="text-bold">Authors:</p>
+                <p class="text-small">Shinichiro Ogawa, Masahiro Satoh</p>
+                <p class="text-bold text-top">Institution:</p>
+                <p class="text-small">Graduate School of Agricultural Science, Tohoku University, Sendai, Japan</p>
+                <p class="text-top-large">
                     <a href="https://onlinelibrary.wiley.com/doi/10.1111/asj.13488" 
                        target="_blank" 
-                       style="color: #74b9ff; text-decoration: none; font-weight: bold; border: 1px solid #74b9ff; padding: 5px 10px; border-radius: 3px; display: inline-block;">
-                        🔗 View Original Paper
+                       class="paper-link">
+                        View Original Paper
                     </a>
                 </p>
             </div>
@@ -86,11 +85,11 @@
             <div class="section">
                 <div class="section-title">Paper Information & References</div>
                 
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #3498db; margin-bottom: 30px;">
+                <div class="citation-box">
                     <p><strong>Citation:</strong> Ogawa, S., & Satoh, M. (2020). Relationship between litter size at birth and within-litter birth weight characteristics in laboratory mice as pilot animal for pig. Animal Science Journal, 91(1), e13488.</p>
                     
                     <p><strong>Key References from the Paper:</strong></p>
-                    <ul style="margin-top: 10px;">
+                    <ul class="list-top">
                         <li>Damgaard, L.H., et al. (2003). Genetics Selection Evolution, 35:399-415</li>
                         <li>Bergsma, R., et al. (2008). Journal of Animal Science, 86:1067-1080</li>
                         <li>Wolf, J., et al. (2008). Livestock Science, 115:195-205</li>
@@ -100,7 +99,7 @@
                 
                 <div class="section-title">Detailed Materials and Methods Flow</div>
                 
-                <div class="flow-container">
+                <div class="flow-container breathing-room">
                     
                     <div class="flow-step">
                         <div class="step-number">1</div>
@@ -186,7 +185,7 @@
                 
                 <div class="section-title">Mathematical Models Used</div>
                 
-                <div class="model-comparison">
+                <div class="model-comparison breathing-room">
                     <div class="model-box model-1">
                         <div class="model-title">Single-trait Animal Model</div>
                         <div class="step-details">
@@ -209,7 +208,7 @@
                             <div class="formula">[y₁/y₂] = [X₁ 0/0 X₂][b₁/b₂] + [Z₁ 0/0 Z₂][a₁/a₂] + [e₁/e₂]</div>
                             
                             <strong>Variance Structure:</strong><br>
-                            <div class="formula">var[a₁/a₂/e₁/e₂] = [Aσ²ₐ₁ Aσₐ₁₂ 0 0/Aσₐ₁₂ Aσ²ₐ₂ 0 0/0 0 Iσ²ₑ₁ R/0 0 R† Iσ²ₑ₂]</div>
+                            <div class="matrix-visual">var[a₁/a₂/e₁/e₂] = [Aσ²ₐ₁ Aσₐ₁₂ 0 0/Aσₐ₁₂ Aσ²ₐ₂ 0 0/0 0 Iσ²ₑ₁ R/0 0 R† Iσ²ₑ₂]</div>
                             
                             <strong>Purpose:</strong> Estimate genetic correlations between traits
                         </div>
@@ -237,10 +236,10 @@
             <div class="section">
                 <div class="section-title">Why, How, What Analysis</div>
                 
-                <div class="analysis-grid">
+                <div class="analysis-grid breathing-room">
                     <div class="analysis-card why-card">
                         <div class="analysis-title">WHY - Research Motivation</div>
-                        <div class="step-details">
+                        <div class="analysis-content">
                             <strong>Primary Problem:</strong> Limited understanding of within-litter birth weight variation impacts on pig breeding efficiency.
                             
                             <ul>
@@ -256,7 +255,7 @@
                     
                     <div class="analysis-card how-card">
                         <div class="analysis-title">HOW - Research Approach</div>
-                        <div class="step-details">
+                        <div class="analysis-content">
                             <strong>Innovative Methodology:</strong> Comprehensive within-litter birth weight characterization using 9 distinct traits.
                             
                             <ul>
@@ -272,7 +271,7 @@
                     
                     <div class="analysis-card what-card">
                         <div class="analysis-title">WHAT - Key Discoveries</div>
-                        <div class="step-details">
+                        <div class="analysis-content">
                             <strong>Major Findings:</strong> Clear genetic basis for litter size-birth weight trade-offs.
                             
                             <ul>
@@ -287,9 +286,58 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Key Results Section -->
+            <div class="section">
+                <div class="section-title">Key Results Summary</div>
+                
+                <div class="results-grid breathing-room">
+                    <div class="stat-box">
+                        <div class="stat-number">-0.31</div>
+                        <div class="stat-label">Genetic correlation between NBA and mean birth weight</div>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <div class="stat-number">105%</div>
+                        <div class="stat-label">Relative genetic gain for NBA via total litter weight selection</div>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">Distinct birth weight traits analyzed</div>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Generations of breeding data</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Practical Implications -->
+            <div class="section">
+                <div class="section-title">Breeding Strategy Implications</div>
+                
+                <div class="best-practices">
+                    <div class="innovation-title">Management Recommendations</div>
+                    
+                    <p><strong>For Pig Breeding Programs:</strong></p>
+                    <ul>
+                        <li><strong>Selection approach:</strong> Use total litter weight as selection criterion rather than NBA alone</li>
+                        <li><strong>Heterogeneity monitoring:</strong> Track within-litter birth weight variation as indicator</li>
+                        <li><strong>Multi-trait selection:</strong> Balance litter size with individual piglet quality</li>
+                        <li><strong>Genetic evaluation:</strong> Include birth weight distribution traits in breeding indices</li>
+                    </ul>
+                    
+                    <p><strong>Research Applications:</strong></p>
+                    <ul>
+                        <li><strong>Model validation:</strong> Mice provide cost-effective pilot studies for pig traits</li>
+                        <li><strong>Parameter estimation:</strong> Similar genetic architectures enable parameter transfer</li>
+                        <li><strong>Trait development:</strong> Test new reproductive traits before pig implementation</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    
-
 </body>
 </html>

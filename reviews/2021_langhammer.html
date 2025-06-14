@@ -6,9 +6,6 @@
     <title>Lifetime Fecundity Research Flow</title>
     <link rel="stylesheet" href="style.css">
 
-
-
-
 <script>
 (function() {
     'use strict';
@@ -60,22 +57,25 @@
 </head>
 <body>
     <div class="container">
-                        <!-- TOP LEFT NAVIGATION -->
+        <!-- TOP LEFT NAVIGATION -->
         <div class="top-left-nav">
-            <a href="../index.html"> Back to Index</a>
+            <a href="../index.html">Back to Index</a>
         </div>
+        
         <div class="header">
             <h1>Two mouse lines selected for large litter size display different lifetime fecundities</h1>
             <p>Long-term Selection Experiment Analysis</p>
             
-            <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
-                <p style="margin: 0; font-size: 0.9em;"><strong>Authors:</strong> Martina Langhammer, Erika Wytrwat, Marten Michaelis, Jennifer Schön, Armin Tuchscherer, Norbert Reinsch, Joachim M Weitzel</p>
-                <p style="margin: 5px 0 0 0; font-size: 0.9em;"><strong>Institution:</strong> Leibniz Institute for Farm Animal Biology (FBN), Dummerstorf, Germany</p>
-                <p style="margin: 10px 0 0 0;">
+            <div class="header-info">
+                <p class="text-bold">Authors:</p>
+                <p class="text-small">Martina Langhammer, Erika Wytrwat, Marten Michaelis, Jennifer Schön, Armin Tuchscherer, Norbert Reinsch, Joachim M Weitzel</p>
+                <p class="text-bold text-top">Institution:</p>
+                <p class="text-small">Leibniz Institute for Farm Animal Biology (FBN), Dummerstorf, Germany</p>
+                <p class="text-top-large">
                     <a href="https://rep.bioscientifica.com/view/journals/rep/161/6/REP-20-0563.xml" 
                        target="_blank" 
-                       style="color: #74b9ff; text-decoration: none; font-weight: bold; border: 1px solid #74b9ff; padding: 5px 10px; border-radius: 3px; display: inline-block;">
-                        🔗 View Original Paper
+                       class="paper-link">
+                        View Original Paper
                     </a>
                 </p>
             </div>
@@ -85,11 +85,11 @@
             <div class="section">
                 <div class="section-title">Paper Information & References</div>
                 
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60; margin-bottom: 30px;">
+                <div class="citation-box">
                     <p><strong>Citation:</strong> Langhammer, M., Wytrwat, E., Michaelis, M., Schön, J., Tuchscherer, A., Reinsch, N., & Weitzel, J. M. (2021). Two mouse lines selected for large litter size display different lifetime fecundities. Reproduction, 161(6), 721-730.</p>
                     
                     <p><strong>Key References from the Paper:</strong></p>
-                    <ul style="margin-top: 10px;">
+                    <ul class="list-top">
                         <li>Holt, M., et al. (2004, 2005). Norwegian selection line studies</li>
                         <li>Dietl, G., et al. (2004). FZTDU founder population establishment</li>
                         <li>Michaelis, M., et al. (2013). Initial FL characterization</li>
@@ -99,9 +99,9 @@
                 
                 <div class="section-title">Mouse Line Characteristics</div>
                 
-                <div class="line-comparison">
-                    <div class="line-box fl1-box">
-                        <div class="line-title">FL1 (Fertility Line 1)</div>
+                <div class="mouse-lines breathing-room">
+                    <div class="line-card fertility">
+                        <h4>FL1 (Fertility Line 1)</h4>
                         <div class="step-details">
                             <strong>Selection:</strong> >181 generations<br>
                             <strong>Strategy:</strong> Balanced fertility<br>
@@ -111,8 +111,8 @@
                         </div>
                     </div>
                     
-                    <div class="line-box fl2-box">
-                        <div class="line-title">FL2 (Fertility Line 2)</div>
+                    <div class="line-card fertility">
+                        <h4>FL2 (Fertility Line 2)</h4>
                         <div class="step-details">
                             <strong>Selection:</strong> >181 generations<br>
                             <strong>Strategy:</strong> Maximum litter size<br>
@@ -122,8 +122,8 @@
                         </div>
                     </div>
                     
-                    <div class="line-box ctrl-box">
-                        <div class="line-title">CTRL (Control)</div>
+                    <div class="line-card control">
+                        <h4>CTRL (Control)</h4>
                         <div class="step-details">
                             <strong>Selection:</strong> Unselected<br>
                             <strong>Strategy:</strong> Natural fertility<br>
@@ -133,8 +133,8 @@
                         </div>
                     </div>
                     
-                    <div class="line-box du6-box">
-                        <div class="line-title">DU6 (Growth)</div>
+                    <div class="line-card body-mass">
+                        <h4>DU6 (Growth)</h4>
                         <div class="step-details">
                             <strong>Selection:</strong> High body weight<br>
                             <strong>Strategy:</strong> Growth focused<br>
@@ -144,8 +144,8 @@
                         </div>
                     </div>
                     
-                    <div class="line-box du6p-box">
-                        <div class="line-title">DU6P (Protein)</div>
+                    <div class="line-card body-mass">
+                        <h4>DU6P (Protein)</h4>
                         <div class="step-details">
                             <strong>Selection:</strong> High protein mass<br>
                             <strong>Strategy:</strong> Protein focused<br>
@@ -158,7 +158,7 @@
                 
                 <div class="section-title">Detailed Experimental Design Flow</div>
                 
-                <div class="flow-container">
+                <div class="flow-container breathing-room">
                     
                     <div class="flow-step">
                         <div class="step-number">1</div>
@@ -260,69 +260,71 @@
                 
                 <div class="section-title">Lifetime Fecundity Results Summary</div>
                 
-                <table class="fecundity-table">
-                    <thead>
-                        <tr>
-                            <th>Mouse Line</th>
-                            <th>Avg Litters/Female</th>
-                            <th>Total Pups/Lifetime</th>
-                            <th>Max Litters Observed</th>
-                            <th>Days in Experiment</th>
-                            <th>Silver Index</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>FL1</strong></td>
-                            <td>5.3</td>
-                            <td>85.7 ± 3.3</td>
-                            <td>9</td>
-                            <td>385</td>
-                            <td>101.2</td>
-                        </tr>
-                        <tr>
-                            <td><strong>FL2</strong></td>
-                            <td>2.7</td>
-                            <td>53.2 ± 3.0</td>
-                            <td>6</td>
-                            <td>269</td>
-                            <td>52.1</td>
-                        </tr>
-                        <tr>
-                            <td><strong>CTRL</strong></td>
-                            <td>5.8</td>
-                            <td>61.6 ± 3.1</td>
-                            <td>10</td>
-                            <td>393</td>
-                            <td>67.1</td>
-                        </tr>
-                        <tr>
-                            <td><strong>DU6</strong></td>
-                            <td>1.9</td>
-                            <td>18.0 ± 1.6</td>
-                            <td>5</td>
-                            <td>223</td>
-                            <td>12.5</td>
-                        </tr>
-                        <tr>
-                            <td><strong>DU6P</strong></td>
-                            <td>3.3</td>
-                            <td>35.1</td>
-                            <td>5</td>
-                            <td>267</td>
-                            <td>35.1</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-container breathing-room">
+                    <table class="example-table">
+                        <thead>
+                            <tr>
+                                <th>Mouse Line</th>
+                                <th>Avg Litters/Female</th>
+                                <th>Total Pups/Lifetime</th>
+                                <th>Max Litters Observed</th>
+                                <th>Days in Experiment</th>
+                                <th>Silver Index</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>FL1</strong></td>
+                                <td>5.3</td>
+                                <td>85.7 ± 3.3</td>
+                                <td>9</td>
+                                <td>385</td>
+                                <td>101.2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>FL2</strong></td>
+                                <td>2.7</td>
+                                <td>53.2 ± 3.0</td>
+                                <td>6</td>
+                                <td>269</td>
+                                <td>52.1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CTRL</strong></td>
+                                <td>5.8</td>
+                                <td>61.6 ± 3.1</td>
+                                <td>10</td>
+                                <td>393</td>
+                                <td>67.1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DU6</strong></td>
+                                <td>1.9</td>
+                                <td>18.0 ± 1.6</td>
+                                <td>5</td>
+                                <td>223</td>
+                                <td>12.5</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DU6P</strong></td>
+                                <td>3.3</td>
+                                <td>35.1</td>
+                                <td>5</td>
+                                <td>267</td>
+                                <td>35.1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             
             <div class="section">
                 <div class="section-title">Why, How, What Analysis</div>
                 
-                <div class="analysis-grid">
+                <div class="analysis-grid breathing-room">
                     <div class="analysis-card why-card">
                         <div class="analysis-title">WHY - Research Motivation</div>
-                        <div class="step-details">
+                        <div class="analysis-content">
                             <strong>Economic Importance:</strong> Lifetime fecundity more relevant than single-litter performance for agricultural applications.
                             
                             <ul>
@@ -338,7 +340,7 @@
                     
                     <div class="analysis-card how-card">
                         <div class="analysis-title">HOW - Methodology Innovation</div>
-                        <div class="step-details">
+                        <div class="analysis-content">
                             <strong>Comprehensive Approach:</strong> First systematic lifetime fecundity comparison of long-term selected mouse lines.
                             
                             <ul>
@@ -354,7 +356,7 @@
                     
                     <div class="analysis-card what-card">
                         <div class="analysis-title">WHAT - Key Discoveries</div>
-                        <div class="step-details">
+                        <div class="analysis-content">
                             <strong>Major Findings:</strong> Two distinct strategies for achieving high fertility with different lifetime outcomes.
                             
                             <ul>
@@ -369,8 +371,107 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Key Results Section -->
+            <div class="section">
+                <div class="section-title">Key Performance Metrics</div>
+                
+                <div class="results-grid breathing-room">
+                    <div class="stat-box">
+                        <div class="stat-number">101.2</div>
+                        <div class="stat-label">FL1 Silver Index (Highest Lifetime Performance)</div>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <div class="stat-number">181+</div>
+                        <div class="stat-label">Generations of Selection</div>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <div class="stat-number">85.7</div>
+                        <div class="stat-label">FL1 Total Lifetime Pups</div>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <div class="stat-number">45+</div>
+                        <div class="stat-label">Years of Continuous Selection</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Strategy Comparison -->
+            <div class="section">
+                <div class="section-title">Breeding Strategy Comparison</div>
+                
+                <div class="comparison-grid breathing-room">
+                    <div class="comparison-box">
+                        <div class="comparison-title">FL1: Balanced Strategy</div>
+                        <div class="step-details">
+                            <strong>Approach:</strong> Optimize lifetime reproductive success<br>
+                            <strong>Selection pressure:</strong> Moderate, sustainable<br>
+                            <strong>Result:</strong> <span class="highlight">Highest total lifetime output</span><br>
+                            <strong>Health impact:</strong> Maintained reproductive longevity<br>
+                            <strong>Litters per female:</strong> 5.3 average<br>
+                            <strong>Silver Index:</strong> 101.2 (best performance)
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-box">
+                        <div class="comparison-title">FL2: Intensive Strategy</div>
+                        <div class="step-details">
+                            <strong>Approach:</strong> Maximize individual litter size<br>
+                            <strong>Selection pressure:</strong> High, focused on single trait<br>
+                            <strong>Result:</strong> <span class="highlight">Largest single litters</span><br>
+                            <strong>Health impact:</strong> Reduced reproductive lifespan<br>
+                            <strong>Litters per female:</strong> 2.7 average<br>
+                            <strong>Silver Index:</strong> 52.1 (reduced lifetime output)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Practical Applications -->
+            <div class="section">
+                <div class="section-title">Agricultural Applications</div>
+                
+                <div class="best-practices">
+                    <div class="innovation-title">Breeding Program Guidelines</div>
+                    
+                    <p><strong>For Livestock Breeding:</strong></p>
+                    <ul>
+                        <li><strong>Selection strategy:</strong> Balance single-litter performance with lifetime productivity</li>
+                        <li><strong>Health monitoring:</strong> Track reproductive longevity alongside fertility</li>
+                        <li><strong>Economic evaluation:</strong> Consider total lifetime value, not just peak performance</li>
+                        <li><strong>Sustainability focus:</strong> Avoid excessive selection pressure that reduces lifespan</li>
+                    </ul>
+                    
+                    <p><strong>Model Applications:</strong></p>
+                    <ul>
+                        <li><strong>Pig breeding:</strong> FL1 strategy translates to sustainable sow productivity</li>
+                        <li><strong>Dairy cattle:</strong> Lifetime milk yield optimization principles</li>
+                        <li><strong>Poultry:</strong> Egg production longevity vs peak laying rates</li>
+                        <li><strong>Sheep/Goats:</strong> Reproductive lifespan in extensive systems</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Trade-offs Analysis -->
+            <div class="section">
+                <div class="section-title">Selection Trade-offs Revealed</div>
+                
+                <div class="warning-box">
+                    <div class="gap-title">Critical Finding: Intensity vs Sustainability</div>
+                    <div class="gap-content">
+                        The study reveals a fundamental trade-off in reproductive selection: 
+                        <strong>FL2's intensive selection for maximum litter size</strong> resulted in 
+                        <strong>reduced reproductive lifespan</strong> and ultimately 
+                        <strong>lower lifetime productivity</strong> compared to FL1's balanced approach. 
+                        This has major implications for commercial breeding programs where 
+                        <span class="highlight">lifetime economic value</span> is more important than peak performance.
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
-
 </html>
